@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Noktası - InnerCharm</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://i.hizliresim.com/7k5dkyb.JPG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            position: relative;
+            text-align: left;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 100px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #343a40;
+            margin-top: 10px;
+        }
+
+        .payment-form h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffc107;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1 1 100%;
+        }
+
+        .form-row .form-group.half {
+            flex: 1 1 48%;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .button-group button {
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-group button:hover {
+            background-color: #e0a800;
+        }
+
+        .order-summary {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .order-summary h3 {
+            margin-top: 0;
+            color: #343a40;
+        }
+
+        .order-summary ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .order-summary ul li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-summary ul li:last-child {
+            border-bottom: none;
+        }
+
+        .order-summary ul li span {
+            font-weight: bold;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .card-info .card {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .card-info .card .chip {
+            width: 50px;
+            height: 35px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .card-info .card .card-number,
+        .card-info .card .card-name,
+        .card-info .card .card-expiry {
+            margin: 0;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+        }
+
+        .card-info .card .card-number {
+            margin-top: 70px;
+            font-size: 1.5rem;
+        }
+
+        .card-info .card .card-expiry {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .card-info .card .card-name {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .card-info p {
+            margin: 20px 0 0;
+            font-size: 0.9rem;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay">
+        <div class="container">
+            <div class="header">
+                <img src="https://i.hizliresim.com/7k5dkyb.JPG" alt="InnerCharm Logo">
+                <h1>Ödeme Noktası</h1>
+            </div>
+            <form class="payment-form">
+                <h2>Fatura Bilgileri</h2>
+                <div class="form-group">
+                    <label for="fullname">Ad Soyad</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Adresi</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon Numarası</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Adres</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="city">Şehir</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="state">İlçe</label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="zipcode">Posta Kodu</label>
+                        <input type="text" id="zipcode" name="zipcode" required maxlength="5">
+                    </div>
+                </div>
+                <h2>Ödeme Bilgileri</h2>
+                <div class="form-group">
+                    <label for="cardname">Kart Üzerindeki İsim</label>
+                    <input type="text" id="cardname" name="cardname" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardnumber">Kart Numarası</label>
+                    <input type="text" id="cardnumber" name="cardnumber" required maxlength="19">
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="expmonth">Son Kullanma Tarihi (Ay)</label>
+                        <select id="expmonth" name="expmonth" required>
+                            <option value="" disabled selected>Ay</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label for="expyear">Son Kullanma Tarihi (Yıl)</label>
+                        <select id="expyear" name="expyear" required>
+                            <option value="" disabled selected>Yıl</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" required maxlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="paymentmethod">Ödeme Yöntemi</label>
+                    <select id="paymentmethod" name="paymentmethod" required>
+                        <option value="creditcard">Kredi Kartı</option>
+                        <option value="debitcard">Banka Kartı</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button type="button" onclick="history.back()">Geri Dön</button>
+                    <button type="submit">Ödemeyi Tamamla</button>
+                </div>
+            </form>
+            <div class="order-summary">
+                <h3>Sipariş Özeti</h3>
+                <ul>
+                    <li>
+                        <span>Ürün 1</span>
+                        <span>₺50.00</span>
+                    </li>
+                    <li>
+                        <span>Ürün 2</span>
+                        <span>₺75.00</span>
+                    </li>
+                    <li>
+                        <span>Ürün 3</span>
+                        <span>₺100.00</span>
+                    </li>
+                    <li>
+                        <span>Toplam</span>
+                        <span>₺225.00</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-info">
+                <div class="card">
+                    <div class="chip"></div>
+                    <p class="card-number" id="card-number">#### #### #### ####</p>
+                    <p class="card-name" id="card-name">Kart Üzerindeki İsim</p>
+                    <p class="card-expiry" id="card-expiry">##/##</p>
+                </div>
+                <p>Kredi kartı bilgileriniz SSL ile korunmaktadır. Güvenli alışveriş yapabilirsiniz.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('cardnumber').addEventListener('input', function (event) {
+            var cardnumber = event.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+            event.target.value = cardnumber;
+            document.getElementById('card-number').textContent = cardnumber || '#### #### #### ####';
+        });
+
+        document.getElementById('cardname').addEventListener('input', function (event) {
+            document.getElementById('card-name').textContent = event.target.value || 'Kart Üzerindeki İsim';
+        });
+
+        document.getElementById('expmonth').addEventListener('change', function (event) {
+            updateExpiry();
+        });
+
+        document.getElementById('expyear').addEventListener('change', function (event) {
+            updateExpiry();
+        });
+
+        document.getElementById('cvv').addEventListener('input', function (event) {
+            var cvv = event.target.value.replace(/\D/g, '');
+            event.target.value = cvv;
+        });
+
+        document.getElementById('zipcode').addEventListener('input', function (event) {
+            var zipcode = event.target.value.replace(/\D/g, '');
+            event.target.value = zipcode;
+        });
+
+        function updateExpiry() {
+            var expmonth = document.getElementById('expmonth').value;
+            var expyear = document.getElementById('expyear').value;
+            document.getElementById('card-expiry').textContent = `${expmonth}/${expyear.slice(-2)}` || '##/##';
+        }
+
+        document.querySelector('.payment-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var fullname = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var address = document.getElementById('address').value;
+            var city = document.getElementById('city').value;
+            var state = document.getElementById('state').value;
+            var zipcode = document.getElementById('zipcode').value;
+            var cardname = document.getElementById('cardname').value;
+            var cardnumber = document.getElementById('cardnumber').value;
+            var expmonth = document.getElementById('expmonth').value;
+            var expyear = document.getElementById('expyear').value;
+            var cvv = document.getElementById('cvv').value;
+            var paymentmethod = document.getElementById('paymentmethod').value;
+
+            // Ödeme işlemi simülasyonu
+            console.log({
+                fullname: fullname,
+                email: email,
+                phone: phone,
+                address: address,
+                city: city,
+                state: state,
+                zipcode: zipcode,
+                cardname: cardname,
+                cardnumber: cardnumber,
+                expmonth: expmonth,
+                expyear: expyear,
+                cvv: cvv,
+                paymentmethod: paymentmethod
+            });
+
+            alert('Ödemeniz başarıyla tamamlandı! Siparişiniz alındı.');
+            // Gerçek uygulamada burada sunucuya istek yapılır ve sonuç kullanıcıya gösterilir.
+        });
+    </script>
+</body>
+
+</html>
